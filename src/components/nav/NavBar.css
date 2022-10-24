@@ -1,0 +1,25 @@
+.navbar {
+    display: flex;
+    flex-wrap: nowrap;
+
+    justify-content: space-around;
+}
+
+.navbar__item {
+    flex-basis: 20%;
+    list-style-type: none;
+
+}
+
+.navbar__logout {
+    margin-left: auto;
+}
+
+.navbar__link {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    color: #1E1E1E;
+
+}
