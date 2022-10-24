@@ -1,0 +1,99 @@
+.welcome-div {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    text-align: center;
+    margin-top: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    background-image: url("https://peakvisor.com/img/news/Great-Smoky-Mountains.jpg");
+}
+
+.welcome-h2 {
+    text-align: center;
+    font-size: 40px;
+}
+
+/* .welcome-aside {
+    float: right;
+    display: flex;
+    
+}
+
+.welcome-img {
+    width: 600px;
+    margin-left: 50px;
+    border: solid;
+    margin-right: 100px;
+    
+} */
+
+.welcome-p {
+
+    padding-left: 400px;
+    font-size: 28px;
+    color: rgb(254, 255, 248);
+    font-weight: 800;
+    margin-left: 70px;
+    width: 900px;
+
+
+}
+
+.jobs-hr {
+    width: 1700px;
+    height: 0px;
+    border: 1px solid #1E1E1E;
+    transform: rotate(-0.09deg);
+    margin-top: 150px;
+
+
+}
+
+.jobs-h2 {
+    text-align: center;
+    font-size: 40px;
+    margin-top: 50px;
+}
+
+.jobs-div {
+    margin-top: 50px;
+}
+
+.jobs-img-div {
+    display: flex;
+    justify-content: space-around;
+    height: 350px;
+
+}
+
+.jobs-img {
+    width: 500px;
+    border: solid;
+}
+
+.jobs-p {
+    font-size: 30px;
+    width: 1000px;
+    text-align: center;
+    margin-left: 450px;
+    padding-top: 30px;
+}
+
+.promo-hr {
+    width: 1700px;
+    height: 0px;
+    border: 1px solid #1E1E1E;
+    transform: rotate(-0.09deg);
+    margin-top: 120px;
+
+}
+
+.promo-div {}
+
+.promo-img {}
+
+.promo-p {
+    font-size: 25px;
+}
