@@ -1,5 +1,38 @@
+import { useEffect, useState } from "react"
 import "./home.css"
 export const Home = () => {
+
+    const [locationServices, setLocationServices] = useState([])
+    const [locations, setLocations] = useState([])
+
+
+
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/locationServices?_expand=location&_expand=service`)
+                .then((response) => response.json())
+                .then((locationsArray) => {
+                    setLocationServices(locationsArray)
+                })
+        }, []
+    )
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/locations`)
+                .then((response) => response.json())
+                .then((locationsArray) => {
+                    setLocations(locationsArray)
+                })
+        }, []
+    )
+
+
+
+
+
+
+
+
     return <>
 
         <div className="welcome-div">
@@ -7,7 +40,7 @@ export const Home = () => {
             {/* <aside className="welcome-aside">
                 <img className="welcome-img" src="../images/welcome.jpeg"></img>
             </aside> */}
-            <p className="welcome-p">
+            <div className="welcome-p">
                 <h2 className="welcome-h2">Welcome</h2>
                 Welcome to Smoky Mountain Landscaping! We
                 strive to put our best foot forward when
@@ -18,7 +51,7 @@ export const Home = () => {
                 team strives to understand each customers
                 desires and ambitions for future yard
                 architecture as well as current yard
-                maintenance or trends.</p>
+                maintenance or trends.</div>
         </div>
         <hr className="jobs-hr"></hr>
         <h2 className="jobs-h2">Previous Jobs</h2>
@@ -34,18 +67,24 @@ export const Home = () => {
                 to provide an excellent customer eperience as well as emplyee experience.
             </p>
         </div>
-        <hr className="promo-hr"></hr>
-        <div className="promo-div">
-            <img className="promo-img" src="../images/pool.jpeg"></img>
-            <p className="promo-p">
-                During our companies period of “Summer Perks”,
-                we partner with local pool cleaning companies
-                to bring you the best of both worlds by
-                providing a cleanpool atmosphere as well as a
-                well kept yard. Bundle deals are available upon
-                request for a pool cleaning experience as well as
-                landscaping/mowing desires.
-            </p>
+        <hr className="locations-hr"></hr>
+        <h2 className="locations-h2">Locations</h2>
+        <section className="locations-sec">
+            {locations.map((location) => {
+                return <div className="locations-div" key={location.id}>
+                    <img className="locations-img" src={location.image}></img>
+                    <ul className="locations-ul">
+                        <li className="locations-li">{location.name}</li>
+                        <li className="locations-li">{location.address}</li>
+                        <li className="locations-li">{location.number}</li>
+                    </ul>
+                </div>
+            })}
+        </section>
+        <div>
+            <button className="locations-button">
+                Services
+            </button>
         </div>
     </>
 }

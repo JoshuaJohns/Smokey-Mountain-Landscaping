@@ -1,5 +1,5 @@
 .welcome-div {
-    width: 100%;
+    /* width: 100%; */
     height: 500px;
     display: flex;
     text-align: center;
@@ -7,12 +7,18 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
-    background-image: url("https://peakvisor.com/img/news/Great-Smoky-Mountains.jpg");
+    border: solid;
+    border-width: 20px;
+    background-image: url("https://www.southernliving.com/thmb/qMoPY7jgUzeUE7fvDMXEabLOwqk=/2000x1125/smart/filters:no_upscale()/GettyImages-519976808-2000-ceaf17f5941848e18bebc2009058fa5b.jpg");
 }
 
 .welcome-h2 {
     text-align: center;
     font-size: 40px;
+    font-weight: 900;
+    border-bottom: solid;
+    color: rgb(227, 245, 229);
+    margin-top: 50px;
 }
 
 /* .welcome-aside {
@@ -30,13 +36,17 @@
 } */
 
 .welcome-p {
-
-    padding-left: 400px;
+    height: 500px;
+    margin-top: 0;
+    background-color: #1e1e1e86;
+    display: flex;
+    flex-direction: column;
+    padding-left: 60px;
+    padding-right: 60px;
     font-size: 28px;
-    color: rgb(254, 255, 248);
+    color: rgb(228, 250, 225);
     font-weight: 800;
-    margin-left: 70px;
-    width: 900px;
+
 
 
 }
@@ -74,14 +84,17 @@
 }
 
 .jobs-p {
+    display: flex;
     font-size: 30px;
-    width: 1000px;
+    /* width: 1000px; */
     text-align: center;
-    margin-left: 450px;
+    /* margin-left: 450px; */
     padding-top: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
-.promo-hr {
+.locations-hr {
     width: 1700px;
     height: 0px;
     border: 1px solid #1E1E1E;
@@ -90,10 +103,37 @@
 
 }
 
-.promo-div {}
+.locations-div {}
 
-.promo-img {}
 
-.promo-p {
+.locations-p {
     font-size: 25px;
 }
+
+.locations-sec {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.locations-div {
+    display: flex;
+    flex-direction: column;
+    background-color: #426333;
+    width: 420px;
+    height: 540px;
+    justify-content: center;
+    padding-left: 20px;
+    border-radius: 32px;
+    color: aliceblue;
+}
+
+.locations-img {
+    width: 400px;
+    height: 400px;
+
+}
+
+.locations-ul {}
+
+.locations-li {}

@@ -1,0 +1,28 @@
+.products-img {
+    height: 100px;
+    width: 100px;
+    margin-top: 22px;
+    margin-left: 20px;
+    border-radius: 12px;
+}
+
+.products-sec {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.products-ul {
+    margin-top: 40px;
+
+}
+
+.products-div {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: antiquewhite;
+    width: 350px;
+    height: 150px;
+    border-radius: 12px;
+    margin: 20px;
+}

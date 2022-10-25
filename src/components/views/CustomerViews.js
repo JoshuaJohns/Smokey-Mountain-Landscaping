@@ -1,6 +1,8 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import { Home } from "../homePage/Home"
 import { NavBar } from "../nav/NavBar"
+import { RequestService } from "../Services/RequestService"
+import { ServiceList } from "../Services/ServiceList"
 import "./Views.css"
 
 
@@ -18,8 +20,8 @@ export const CustomerViews = () => {
             }>
 
                 <Route path="home" element={< Home />} />
-                <Route path="locations" element={<></>} />
-                <Route path="services" element={<></>} />
+                <Route path="services" element={< ServiceList />} />
+                <Route path="service/:serviceId" element={< RequestService />} />
                 <Route path="profile" element={<></>} />
                 <Route path="reviews" element={<></>} />
                 {/* <Route path="ticket/create" element={<></>} />
