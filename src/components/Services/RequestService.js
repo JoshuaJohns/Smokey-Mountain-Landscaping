@@ -4,32 +4,18 @@ import { useNavigate } from "react-router-dom"
 
 
 export const RequestService = () => {
-    /* http://localhost:8088/serviceRequests
-        {
-    "id": 1,
-    "userId": 1,
-    "locationServiceId": 1,
-    "scale": "Per Acre",
-    "quotePrice": 40,
-    "dateRequested": ""
-  }
-
-    */
-
-
-
-
 
     const [locations, setLocations] = useState([])
     const { serviceId } = useParams()
     const [userChoices, update] = useState({
 
-        quantity: 0,
-        image: "",
-        totalPrice: 0
+        description: "",
+        locationId: 0,
+        dateRequested: ""
 
     })
     const [products, setProducts] = useState([])
+    const [customer, setCustomer] = useState([])
 
     const navigate = useNavigate()
 
@@ -55,54 +41,86 @@ export const RequestService = () => {
                 })
         }, []
     )
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/customers?_expand=user&userId=${SmokyUserObject.id}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    const customerObj = data[0]
+                    setCustomer(customerObj)
+                })
+        }, []
+    )
 
-    const totalPrice = `${products.price * userChoices.quantity}`
 
-    const localKandyUser = localStorage.getItem("smokey_user")
-    const KandyUserObject = JSON.parse(localKandyUser)
+
+    const localSmokyUser = localStorage.getItem("smokey_user")
+    const SmokyUserObject = JSON.parse(localSmokyUser)
 
     const handleSubmitButton = (event) => {
         event.preventDefault()
-        const productToSendToAPI = {
-            userId: KandyUserObject.id,
-            productLocationId: products?.productLocations[0].id,
-            totalPrice: parseFloat(totalPrice, 2),
-            datePurchased: new Date(),
-            quantity: userChoices.quantity,
+
+        const locationServiceIdObj = {
+            locationId: userChoices.locationId,
+            serviceId: products.id
         }
-        return fetch(`http://localhost:8088/servicesRequests`, {
+
+        const serviceRequestsObj = {
+            userId: SmokyUserObject.id,
+            locationServiceId: 0,
+            service: products.name,
+            scale: products.scale,
+            description: userChoices.description,
+            quotePrice: "Pending",
+            status: "Pending",
+            address: customer.address,
+            dateRequested: userChoices.dateRequested,
+
+        }
+        return fetch(`http://localhost:8088/locationServices`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(productToSendToAPI)
+            body: JSON.stringify(locationServiceIdObj)
         })
             .then(res => res.json())
+            .then((locationServiceObj) => {
+                serviceRequestsObj.locationServiceId = locationServiceObj.id
+            })
             .then(() => {
-                navigate("/services")
+                fetch(`http://localhost:8088/serviceRequests`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(serviceRequestsObj)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        navigate("/services")
+                    })
             })
     }
-
 
 
     return (
         <form className="productForm">
             <h2 className="productForm__title">Requesting {products.name} Service</h2>
-            <div>{`${products.name}`}</div>
+            <div>{<b>Quoted By:</b>} {`${products.quotedBy}`}</div>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="price">{products.scale}:</label>
+                    <label htmlFor="price"><b>Description of what you want:</b><br></br>{products.scale}:</label>
                     <input
                         required autoFocus
-                        type="number"
+                        type="text"
                         className="form-control"
-                        placeholder="How many"
-                        value={userChoices.quantity}
+                        placeholder="Your Description"
                         onChange={
                             (evt) => {
                                 const copy = { ...userChoices }
-                                copy.quantity = Number(evt.target.value)
+                                copy.description = evt.target.value
                                 update(copy)
                             }
                         } />
@@ -111,7 +129,7 @@ export const RequestService = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="locationId">Store Location:</label>
+                    <label htmlFor="locationId"><b>What Location are you closest to:</b></label>
                     {locations.map((location) => {
                         return <div key={location.id} className="radio">
 
@@ -134,26 +152,6 @@ export const RequestService = () => {
                 </div>
             </fieldset>
 
-
-
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="name">Your address:</label>
-                    <input
-                        required autoFocus
-                        name="name"
-                        type="address"
-                        className="form-control"
-                        value={userChoices.address}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...userChoices }
-                                copy.address = evt.target.value
-                                update(copy)
-                            }
-                        } />
-                </div>
-            </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="name">Request Your Service On:</label>
@@ -162,11 +160,11 @@ export const RequestService = () => {
                         name="name"
                         type="date"
                         className="form-control"
-                        value={userChoices.date}
+                        value={userChoices.dateRequested}
                         onChange={
                             (evt) => {
                                 const copy = { ...userChoices }
-                                copy.date = evt.target.value
+                                copy.dateRequested = evt.target.value
                                 update(copy)
                             }
                         } />
