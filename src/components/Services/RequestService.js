@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom"
 export const RequestService = () => {
 
     const [locations, setLocations] = useState([])
-    const { serviceId } = useParams()
+    const [service, setService] = useState([])
+    const [customer, setCustomer] = useState([])
+
     const [userChoices, update] = useState({
 
         description: "",
@@ -14,9 +16,8 @@ export const RequestService = () => {
         dateRequested: ""
 
     })
-    const [products, setProducts] = useState([])
-    const [customer, setCustomer] = useState([])
 
+    const { serviceId } = useParams()
     const navigate = useNavigate()
 
 
@@ -37,7 +38,7 @@ export const RequestService = () => {
                 .then((response) => response.json())
                 .then((data) => {
                     const productObj = data[0]
-                    setProducts(productObj)
+                    setService(productObj)
                 })
         }, []
     )
@@ -62,14 +63,14 @@ export const RequestService = () => {
 
         const locationServiceIdObj = {
             locationId: userChoices.locationId,
-            serviceId: products.id
+            serviceId: service.id
         }
 
         const serviceRequestsObj = {
             userId: SmokyUserObject.id,
             locationServiceId: 0,
-            service: products.name,
-            scale: products.scale,
+            service: service.name,
+            scale: service.scale,
             description: userChoices.description,
             quotePrice: "Pending",
             status: "Pending",
@@ -106,12 +107,12 @@ export const RequestService = () => {
 
     return (
         <form className="productForm">
-            <h2 className="productForm__title">Requesting {products.name} Service</h2>
-            <div>{<b>Quoted By:</b>} {`${products.quotedBy}`}</div>
+            <h2 className="productForm__title">Requesting {service.name} Service</h2>
+            <div>{<b>Quoted By:</b>} {`${service.quotedBy}`}</div>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="price"><b>Description of what you want:</b><br></br>{products.scale}:</label>
+                    <label htmlFor="price"><b>Description of what you want:</b><br></br>{service.scale}:</label>
                     <input
                         required autoFocus
                         type="text"
