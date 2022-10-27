@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
-export const Profile = () => {
-    const [customer, setCustomer] = useState([])
-    const [requests, setRequest] = useState([])
+export const EmployeeProfile = () => {
+    const [employee, setEmployee] = useState([])
+    const [requests, setRequests] = useState([])
+    const [request, setRequest] = useState([])
     const [filteredRequests, setFilteredTickets] = useState([])
     const [accepted, setAccepted] = useState(false)
     const [rejected, setRejected] = useState(false)
     const [pending, setPending] = useState(false)
 
-
+    const { requestId } = useParams()
     const navigate = useNavigate()
     const localSmokyUser = localStorage.getItem("smokey_user")
     const SmokyUserObject = JSON.parse(localSmokyUser)
@@ -17,17 +18,25 @@ export const Profile = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/customers?_expand=user&userId=${SmokyUserObject.id}`)
+            fetch(`http://localhost:8088/employess?_expand=user&userId=${SmokyUserObject.id}`)
                 .then((response) => response.json())
                 .then((data) => {
-                    const customerObj = data[0]
-                    setCustomer(customerObj)
+                    const employeeObj = data[0]
+                    setEmployee(employeeObj)
                 })
         }, []
     )
     useEffect(
         () => {
             getAllRequests()
+
+            fetch(`http://localhost:8088/serviceRequests?_expand=user&id=${requestId}`)
+                .then((response) => response.json())
+                .then((data) => {
+
+                    setRequest(data)
+
+                })
         }, []
     )
 
@@ -52,25 +61,73 @@ export const Profile = () => {
     )
 
     const getAllRequests = () => {
-        fetch(`http://localhost:8088/serviceRequests?_expand=user&userId=${SmokyUserObject.id}`)
+        fetch(`http://localhost:8088/serviceRequests?_expand=user`)
             .then((response) => response.json())
             .then((data) => {
 
-                setRequest(data)
+                setRequests(data)
             })
     }
 
-    const deleteButton = (requestId) => {
+    const AcceptButton = (requestId) => {
+
+
+        return <button onClick={() => {
+
+            const serviceRequestObj = {
+                userId: request.userId,
+                locationServiceId: request.locationServiceId,
+                service: request.service,
+                scale: request.scale,
+                description: request.description,
+                quotePrice: "",
+                status: "Rejected",
+                address: request.address,
+                dateRequested: request.dateRequested,
+                id: request.id
+            }
+            const employeeTicketObj = {
+                fullName: requests?.user?.fullName,
+                email: requests?.user?.email
+            }
+
+            fetch(`http://localhost:8088/serviceRequests/${requestId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(serviceRequestObj)
+            })
+                .then(res => res.json())
+                .then(() => {
+                    fetch(`http://localhost:8088/users/${SmokyUserObject.id}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(employeeTicketObj)
+                    })
+                        .then(res => res.json())
+                })
+                .then(() => {
+                    getAllRequests()
+                })
+
+        }}
+            className="ticket_finish">Accept</button>
+
+    }
+    const rejectButton = (requestId) => {
         return <button onClick={() => {
             fetch(`http://localhost:8088/serviceRequests/${requestId}`, {
-                method: "DELETE"
+                method: "PUT"
             })
                 .then(() => {
 
                     getAllRequests()
                 })
         }}
-            className="ticket_finish">DELETE</button>
+            className="ticket_finish">Reject</button>
 
     }
 
@@ -81,14 +138,14 @@ export const Profile = () => {
         <h2 className="profile-h2">My Account</h2>
 
         <div className="profile-div">
-            <img src={customer.image} alt="image"></img>
+            <img src={employee.image} alt="image"></img>
             <ul className="profile-ul">
-                <li className="profile-li">{customer?.user?.fullName}</li>
-                <li className="profile-li">{customer?.user?.email}</li>
-                <li className="profile-li">{customer?.address}</li>
-                <li className="profile-li">{customer?.phoneNumber}</li>
+                <li className="profile-li">{employee?.user?.fullName}</li>
+                <li className="profile-li">{employee?.user?.email}</li>
+                <li className="profile-li">{employee?.startDate}</li>
+                <li className="profile-li">{employee?.phoneNumber}</li>
             </ul>
-            <button className="profile-edit-btn" onClick={() => navigate("/profile/edit")}>Edit</button>
+            <button className="profile-edit-btn" onClick={() => navigate("/employee/edit")}>Edit</button>
         </div>
 
         <div className="service-btns">
@@ -116,9 +173,8 @@ export const Profile = () => {
                     <aside className="card-aside-bottom">
                         {request.dateRequested}
                     </aside>
-                    {
-                        deleteButton(request.id)
-                    }
+                    <button onClick={() => navigate(`/inspect/${request.id}`)}>inspect Request</button>
+
                 </div>
             })}
         </div>

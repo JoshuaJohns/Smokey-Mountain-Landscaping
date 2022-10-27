@@ -26,7 +26,13 @@ export const Register = (props) => {
                         staff: createdUser.isStaff
                     }))
 
-                    navigate("/")
+                    if (customer.isStaff) {
+
+                        navigate("/newEmployee")
+                    }
+                    else {
+                        navigate("/newCustomer")
+                    }
                 }
             })
     }
