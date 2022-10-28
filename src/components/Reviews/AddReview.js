@@ -54,6 +54,7 @@ export const AddReview = () => {
             service: userChoices.service,
             description: userChoices.description,
             dateOfService: userChoices.dateOfService,
+            name: customer?.user?.fullName
 
         }
         return fetch(`http://localhost:8088/reviews`, {

@@ -9,25 +9,44 @@ export const ServiceList = () => {
     const navigate = useNavigate()
 
 
+    const localSmokyUser = localStorage.getItem("smokey_user")
+    const SmokyUserObject = JSON.parse(localSmokyUser)
 
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/services`)
-                .then((response) => response.json())
-                .then((servicesArray) => {
-                    setServices(servicesArray)
-                })
+            getAllServices()
         }, []
     )
     // useEffect(
     //     () => {
-    //         const searchedTickets = services.filter(product => {
-    //             return product.name.toLowerCase().startsWith(seachTermState.toLowerCase())
+    //         const searchedTickets = services.filter(service => {
+    //             return service.name.toLowerCase().startsWith(seachTermState.toLowerCase())
     //         })
     //         setFilteredProducts(searchedTickets)
     //     }, [seachTermState, services]
     // )
+    const getAllServices = () => {
+        fetch(`http://localhost:8088/services`)
+            .then((response) => response.json())
+            .then((servicesArray) => {
+                setServices(servicesArray)
+            })
+    }
+
+    const deleteButton = (serviceId) => {
+        return <button onClick={() => {
+            fetch(`http://localhost:8088/services/${serviceId}`, {
+                method: "DELETE"
+            })
+                .then(() => {
+
+                    getAllServices()
+                })
+        }}
+            className="ticket_finish">DELETE</button>
+
+    }
 
 
 
@@ -36,14 +55,36 @@ export const ServiceList = () => {
         <p className="info-p"></p>
 
         <h2>Services</h2>
+        {
+            SmokyUserObject.staff
+                ? <>
+                    <button onClick={() => navigate(`/service/add`)}>Add Service</button>
+
+                </>
+                : <>
+                </>
+        }
         <section className="services-sec" >
-            {services.map((product) => {
-                return <div className="services-div" key={product.id}>
-                    <div><img className="services-img" src={product.image} alt="Image" /></div>
+            {services.map((service) => {
+                return <div className="services-div" key={service.id}>
+                    <div><img className="services-img" src={service.image} alt="Image" /></div>
                     <ul className="services-ul">
-                        <li className="services-li">{product.name}</li>
+                        <li className="services-li">{service.name}</li>
                         <li className="services-li">Description</li>
-                        <button onClick={() => navigate(`/service/${product.id}`)}>Request Service</button>
+                        {
+                            SmokyUserObject.staff
+                                ? <>
+                                    <button onClick={() => navigate(`/service/edit/${service.id}`)}>Edit</button>
+                                    {
+                                        deleteButton(service.id)
+                                    }
+
+                                </>
+                                : <>
+                                    <button onClick={() => navigate(`/service/${service.id}`)}>Request Service</button>
+
+                                </>
+                        }
                     </ul>
                 </div>
             })}

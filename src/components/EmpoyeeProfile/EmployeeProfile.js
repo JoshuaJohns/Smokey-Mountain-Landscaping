@@ -9,6 +9,8 @@ export const EmployeeProfile = () => {
     const [accepted, setAccepted] = useState(false)
     const [rejected, setRejected] = useState(false)
     const [pending, setPending] = useState(false)
+    const [myTickets, setMyTickets] = useState(false)
+
 
     const { requestId } = useParams()
     const navigate = useNavigate()
@@ -40,6 +42,7 @@ export const EmployeeProfile = () => {
         }, []
     )
 
+
     useEffect(
         () => {
             if (accepted) {
@@ -54,10 +57,14 @@ export const EmployeeProfile = () => {
                 const requestPending = requests.filter(request => request.status === "Pending")
                 setFilteredTickets(requestPending)
             }
+            else if (myTickets) {
+                const userTickets = requests.filter(request => request.inspectedBy === employee?.user?.fullName)
+                setFilteredTickets(userTickets)
+            }
             else {
                 setFilteredTickets(requests)
             }
-        }, [accepted, requests, rejected, pending]
+        }, [accepted, requests, rejected, pending, myTickets]
     )
 
     const getAllRequests = () => {
@@ -68,69 +75,6 @@ export const EmployeeProfile = () => {
                 setRequests(data)
             })
     }
-
-    const AcceptButton = (requestId) => {
-
-
-        return <button onClick={() => {
-
-            const serviceRequestObj = {
-                userId: request.userId,
-                locationServiceId: request.locationServiceId,
-                service: request.service,
-                scale: request.scale,
-                description: request.description,
-                quotePrice: "",
-                status: "Rejected",
-                address: request.address,
-                dateRequested: request.dateRequested,
-                id: request.id
-            }
-            const employeeTicketObj = {
-                fullName: requests?.user?.fullName,
-                email: requests?.user?.email
-            }
-
-            fetch(`http://localhost:8088/serviceRequests/${requestId}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(serviceRequestObj)
-            })
-                .then(res => res.json())
-                .then(() => {
-                    fetch(`http://localhost:8088/users/${SmokyUserObject.id}`, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(employeeTicketObj)
-                    })
-                        .then(res => res.json())
-                })
-                .then(() => {
-                    getAllRequests()
-                })
-
-        }}
-            className="ticket_finish">Accept</button>
-
-    }
-    const rejectButton = (requestId) => {
-        return <button onClick={() => {
-            fetch(`http://localhost:8088/serviceRequests/${requestId}`, {
-                method: "PUT"
-            })
-                .then(() => {
-
-                    getAllRequests()
-                })
-        }}
-            className="ticket_finish">Reject</button>
-
-    }
-
 
 
 
@@ -149,10 +93,11 @@ export const EmployeeProfile = () => {
         </div>
 
         <div className="service-btns">
-            <button className="all" onClick={() => { setAccepted(false); setRejected(false); setPending(false) }}>All Requests</button>
-            <button className="all" onClick={() => { setAccepted(false); setRejected(false); setPending(true) }} >Pending</button>
-            <button className="all" onClick={() => { setAccepted(true); setRejected(false); setPending(false) }} >Accepted</button>
-            <button className="all" onClick={() => { setAccepted(false); setRejected(true); setPending(false) }} >Rejected</button>
+            <button className="all" onClick={() => { setAccepted(false); setRejected(false); setPending(false); setMyTickets(false) }}>All Requests</button>
+            <button className="all" onClick={() => { setAccepted(false); setRejected(false); setPending(true); setMyTickets(false) }} >Pending</button>
+            <button className="all" onClick={() => { setAccepted(true); setRejected(false); setPending(false); setMyTickets(false) }} >Accepted</button>
+            <button className="all" onClick={() => { setAccepted(false); setRejected(true); setPending(false); setMyTickets(false) }} >Rejected</button>
+            <button className="all" onClick={() => { setAccepted(false); setRejected(false); setPending(false); setMyTickets(true) }} >My Tickets</button>
 
 
         </div>
@@ -173,6 +118,17 @@ export const EmployeeProfile = () => {
                     <aside className="card-aside-bottom">
                         {request.dateRequested}
                     </aside>
+                    {
+                        myTickets
+                            ? <>
+                                {
+                                    <button>delete</button>
+                                }
+                            </>
+                            : <>
+
+                            </>
+                    }
                     <button onClick={() => navigate(`/inspect/${request.id}`)}>inspect Request</button>
 
                 </div>

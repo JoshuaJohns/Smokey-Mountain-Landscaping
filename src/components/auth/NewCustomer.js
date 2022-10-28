@@ -6,10 +6,12 @@ export const NewCustomer = () => {
 
 
     // TODO: This state object should not be blank
+    const [locations, setLocations] = useState([])
     const [customer, setCustomer] = useState({
         image: "",
         address: '',
         phoneNumber: "",
+        locationId: 0
 
     })
 
@@ -17,6 +19,16 @@ export const NewCustomer = () => {
     const navigate = useNavigate()
     const localSmokyUser = localStorage.getItem("smokey_user")
     const SmokyUserObject = JSON.parse(localSmokyUser)
+
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/locations`)
+                .then((response) => response.json())
+                .then((locationsArray) => {
+                    setLocations(locationsArray)
+                })
+        }, []
+    )
 
 
     const handleSaveButtonClick = (event) => {
@@ -26,6 +38,7 @@ export const NewCustomer = () => {
             image: "",
             address: customer.address,
             phoneNumber: customer.phoneNumber,
+            locationId: customer.locationId,
             userId: SmokyUserObject.id
         }
 
@@ -62,6 +75,30 @@ export const NewCustomer = () => {
                             setCustomer(copy)
                         }
                     }></textarea>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="locationId"><b>What Location are you closest to:</b></label>
+                {locations.map((location) => {
+                    return <div key={location.id} className="radio">
+
+                        <label>{location.name}</label>
+                        <input
+                            name="locationId"
+                            type="radio"
+                            value={location.id}
+                            checked={customer.locationId === location.id}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...customer }
+                                    copy.locationId = parseInt(evt.target.value)
+                                    setCustomer(copy)
+                                }
+                            }
+                        />
+                    </div>
+                })}
             </div>
         </fieldset>
         <fieldset>

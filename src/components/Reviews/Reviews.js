@@ -56,7 +56,17 @@ export const Reviews = () => {
         <h2>Customer Reviews</h2>
 
         <div className="reviews-btns-div">
-            <button onClick={() => navigate(`/reviews/add`)}>Add Review</button>
+            {
+                SmokyUserObject.staff
+                    ? <>
+
+
+                    </>
+                    : <>
+                        <button onClick={() => navigate(`/reviews/add`)}>Add Review</button>
+
+                    </>
+            }
 
         </div>
         <section className="reviews-sec" >
@@ -65,14 +75,36 @@ export const Reviews = () => {
                     <div><img className="reviews-img" src={reviews.image} alt="Image" /></div>
 
                     <ul className="reviews-ul">
-                        <li className="reviews-li">{customer?.user?.fullName}</li>
+                        <li className="reviews-li">{reviews.name}</li>
                         <li className="reviews-li">{reviews.dateOfService}</li>
                         <li className="reviews-li">{reviews.service}</li>
                         <li className="reviews-li">{reviews.description}</li>
                     </ul>
                     <div>
-                        <button onClick={() => navigate(`/reviews/${reviews.id}`)}>Edit</button>
-                        {deleteButton(reviews.id)}
+                        {
+                            SmokyUserObject.staff
+                                ? <>
+                                    {deleteButton(reviews.id)}
+
+
+                                </>
+                                : <>
+                                    {/* <button onClick={() => navigate(`/reviews/${reviews.id}`)}>Edit</button> */}
+
+                                </>
+                        }
+                        {
+                            (SmokyUserObject.staff === false & reviews.userId === SmokyUserObject.id)
+                                ? <>
+
+                                    <button onClick={() => navigate(`/reviews/${reviews.id}`)}>Edit</button>
+
+
+                                </>
+                                : <>
+
+                                </>
+                        }
 
                     </div>
                 </div>

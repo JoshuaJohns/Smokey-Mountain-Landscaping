@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import "./home.css"
 export const Home = () => {
 
     const [locationServices, setLocationServices] = useState([])
     const [locations, setLocations] = useState([])
 
+    const navigate = useNavigate()
 
 
     useEffect(
@@ -82,9 +84,8 @@ export const Home = () => {
             })}
         </section>
         <div>
-            <button className="locations-button">
-                Services
-            </button>
+            <button onClick={() => navigate(`/services`)}>To Services</button>
+
         </div>
     </>
 }
