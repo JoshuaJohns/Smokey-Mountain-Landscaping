@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom"
 
 export const RequestService = () => {
 
-    const [locations, setLocations] = useState([])
     const [service, setService] = useState([])
     const [customer, setCustomer] = useState([])
 
@@ -21,15 +20,7 @@ export const RequestService = () => {
     const navigate = useNavigate()
 
 
-    useEffect(
-        () => {
-            fetch(`http://localhost:8088/locations`)
-                .then((response) => response.json())
-                .then((locationsArray) => {
-                    setLocations(locationsArray)
-                })
-        }, []
-    )
+
 
 
     useEffect(
@@ -62,7 +53,7 @@ export const RequestService = () => {
         event.preventDefault()
 
         const locationServiceIdObj = {
-            locationId: userChoices.locationId,
+            locationId: customer.locationId,
             serviceId: service.id
         }
 
@@ -99,7 +90,7 @@ export const RequestService = () => {
                 })
                     .then(res => res.json())
                     .then(() => {
-                        navigate("/services")
+                        navigate("/profile")
                     })
             })
     }
@@ -128,30 +119,7 @@ export const RequestService = () => {
                 </div>
             </fieldset>
 
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="locationId"><b>What Location are you closest to:</b></label>
-                    {locations.map((location) => {
-                        return <div key={location.id} className="radio">
 
-                            <label>{location.name}</label>
-                            <input
-                                name="locationId"
-                                type="radio"
-                                value={location.id}
-                                checked={userChoices.locationId === location.id}
-                                onChange={
-                                    (evt) => {
-                                        const copy = { ...userChoices }
-                                        copy.locationId = parseInt(evt.target.value)
-                                        update(copy)
-                                    }
-                                }
-                            />
-                        </div>
-                    })}
-                </div>
-            </fieldset>
 
             <fieldset>
                 <div className="form-group">

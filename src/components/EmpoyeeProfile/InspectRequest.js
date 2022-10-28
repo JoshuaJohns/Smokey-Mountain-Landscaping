@@ -10,6 +10,7 @@ export const InspectRequest = () => {
     const [locations, setLocations] = useState([])
     const [request, setRequest] = useState([])
     const [customer, setCustomer] = useState([])
+    const [employee, setEmployee] = useState([])
 
     const [userChoices, update] = useState({
 
@@ -48,6 +49,17 @@ export const InspectRequest = () => {
         }, []
     )
 
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/employess?_expand=user&userId=${SmokyUserObject.id}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    const employeeObj = data[0]
+                    setEmployee(employeeObj)
+                })
+        }, []
+    )
+
 
 
     const localSmokyUser = localStorage.getItem("smokey_user")
@@ -66,12 +78,14 @@ export const InspectRequest = () => {
             status: userChoices.status,
             address: request.address,
             dateRequested: request.dateRequested,
+            inspectedBy: employee?.user?.fullName,
             id: request.id
+
         }
-        const employeeTicketObj = {
-            userId: SmokyUserObject.id,
-            serviceRequestId: request.id
-        }
+        // const employeeTicketObj = {
+        //     userId: SmokyUserObject.id,
+        //     serviceRequestId: request.id
+        // }
 
         fetch(`http://localhost:8088/serviceRequests/${requestId}`, {
             method: "PUT",
@@ -81,16 +95,16 @@ export const InspectRequest = () => {
             body: JSON.stringify(serviceRequestObj)
         })
             .then(res => res.json())
-            .then(() => {
-                fetch(`http://localhost:8088/employeeTickets`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(employeeTicketObj)
-                })
-                    .then(res => res.json())
-            })
+            // .then(() => {
+            //     fetch(`http://localhost:8088/employeeTickets`, {
+            //         method: "POST",
+            //         headers: {
+            //             "Content-Type": "application/json"
+            //         },
+            //         body: JSON.stringify(employeeTicketObj)
+            //     })
+            //         .then(res => res.json())
+            // })
             .then(() => {
                 navigate("/profile")
             })
