@@ -34,7 +34,7 @@ export const EditEmployee = () => {
         event.preventDefault()
 
         const customerObj = {
-            image: "",
+            image: employee.image,
             startDate: employee.startDate,
             phoneNumber: employee.phoneNumber,
             userId: employee.userId
@@ -42,7 +42,9 @@ export const EditEmployee = () => {
 
         const userObj = {
             fullName: employee?.user?.fullName,
+            isStaff: employee?.user?.isStaff,
             email: employee?.user?.email
+
         }
 
         return fetch(`http://localhost:8088/employess/${employee.id}`, {
@@ -70,7 +72,25 @@ export const EditEmployee = () => {
 
 
     return <form className="ticketForm">
-        <h2 className="ticketForm__title">Service Ticket</h2>
+        <h2 className="ticketForm__title">My Profile</h2>
+        <fieldset>
+
+            <div className="form-group">
+                <label htmlFor="description">Profile Image Url:</label>
+                <textarea
+                    required autoFocus
+                    type="text"
+                    className="form-control"
+                    value={employee.image}
+                    onChange={
+                        (evt) => {
+                            const copy = { ...employee }
+                            copy.image = evt.target.value
+                            setEmployee(copy)
+                        }
+                    }></textarea>
+            </div>
+        </fieldset>
         <fieldset>
 
             <div className="form-group">

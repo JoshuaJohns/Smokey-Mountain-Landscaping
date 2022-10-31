@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import "./EmployeeProfile.css"
 
 export const EmployeeProfile = () => {
     const [employee, setEmployee] = useState([])
@@ -79,17 +80,17 @@ export const EmployeeProfile = () => {
 
 
     return <section>
-        <h2 className="profile-h2">My Account</h2>
+        <h2 className="profile-h2">My Profile</h2>
 
         <div className="profile-div">
-            <img src={employee.image} alt="image"></img>
+            <img className="profile-img" src={employee.image} alt="image"></img>
             <ul className="profile-ul">
                 <li className="profile-li">{employee?.user?.fullName}</li>
                 <li className="profile-li">{employee?.user?.email}</li>
                 <li className="profile-li">{employee?.startDate}</li>
                 <li className="profile-li">{employee?.phoneNumber}</li>
+                <button className="profile-edit-btn" onClick={() => navigate("/employee/edit")}>Edit</button>
             </ul>
-            <button className="profile-edit-btn" onClick={() => navigate("/employee/edit")}>Edit</button>
         </div>
 
         <div className="service-btns">
@@ -102,34 +103,38 @@ export const EmployeeProfile = () => {
 
         </div>
 
-        <div className="services-div">
+        <div className="services-div-profile">
             {filteredRequests.map((request) => {
                 return <div className="request-card" key={request.id}>
                     <aside className="card-aside-top">
-                        {request.status}
+                        <h5>{request.status} By {request.inspectedBy}</h5>
+                        <h6></h6>
                     </aside>
+
                     <ul className="card-ul">
                         <li className="card-li">{request?.user?.fullName}</li>
                         <li className="card-li">{request.service}</li>
                         <li className="card-li">{request.address}</li>
-                        <li className="card-li">{request.quotePrice}</li>
+                        <li className="card-li">${request.quotePrice}</li>
                         <li className="card-li">{request.description}</li>
                     </ul>
                     <aside className="card-aside-bottom">
+                        <h3 className="date-requested-h3">Service Date:</h3>
+
                         {request.dateRequested}
                     </aside>
                     {
                         myTickets
                             ? <>
                                 {
-                                    <button>delete</button>
+                                    <button className="service-delete">delete</button>
                                 }
                             </>
                             : <>
 
                             </>
                     }
-                    <button onClick={() => navigate(`/inspect/${request.id}`)}>inspect Request</button>
+                    <button className="inspect-btn" onClick={() => navigate(`/inspect/${request.id}`)}>inspect Request</button>
 
                 </div>
             })}

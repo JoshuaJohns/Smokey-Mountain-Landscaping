@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-
+import "./Profile.css"
 export const Profile = () => {
     const [customer, setCustomer] = useState([])
     const [requests, setRequest] = useState([])
@@ -70,7 +70,7 @@ export const Profile = () => {
                     getAllRequests()
                 })
         }}
-            className="ticket_finish">DELETE</button>
+            className="ticket_delete">DELETE</button>
 
     }
 
@@ -81,14 +81,14 @@ export const Profile = () => {
         <h2 className="profile-h2">My Account</h2>
 
         <div className="profile-div">
-            <img src={customer.image} alt="image"></img>
+            <img className="profile-img" src={customer.image} alt="image"></img>
             <ul className="profile-ul">
                 <li className="profile-li">{customer?.user?.fullName}</li>
                 <li className="profile-li">{customer?.user?.email}</li>
                 <li className="profile-li">{customer?.address}</li>
                 <li className="profile-li">{customer?.phoneNumber}</li>
+                <button className="profile-edit-btn" onClick={() => navigate("/profile/edit")}>Edit</button>
             </ul>
-            <button className="profile-edit-btn" onClick={() => navigate("/profile/edit")}>Edit</button>
         </div>
 
         <div className="service-btns">
@@ -100,7 +100,7 @@ export const Profile = () => {
 
         </div>
 
-        <div className="services-div">
+        <div className="services-div-profile">
             {filteredRequests.map((request) => {
                 return <div className="request-card" key={request.id}>
                     <aside className="card-aside-top">
@@ -110,11 +110,12 @@ export const Profile = () => {
                         <li className="card-li">{request?.user?.fullName}</li>
                         <li className="card-li">{request.service}</li>
                         <li className="card-li">{request.address}</li>
-                        <li className="card-li">{request.quotePrice}</li>
+                        <li className="card-li"> ${request.quotePrice}</li>
                         <li className="card-li">{request.description}</li>
                     </ul>
                     <aside className="card-aside-bottom">
-                        {request.dateRequested}
+                        <h3 className="date-requested-h3">Service Date:</h3>
+                        <h5 className="date-h5">{request.dateRequested}</h5>
                     </aside>
                     {
                         deleteButton(request.id)

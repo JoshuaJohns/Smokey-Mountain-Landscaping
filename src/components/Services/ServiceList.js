@@ -51,10 +51,11 @@ export const ServiceList = () => {
 
 
     return <>
-        <h2 className="gerneral-info">General Information</h2>
-        <p className="info-p"></p>
+        <h2 className="services-h2">Services We Provide</h2>
+        {/* <h2 className="gerneral-info">General Information</h2> */}
+        <p className="info-p">Below you will see a large variety of services procided by The Mowing Company. We strive to meet
+            all of our customers needs and expectations.</p>
 
-        <h2>Services</h2>
         {
             SmokyUserObject.staff
                 ? <>
@@ -69,8 +70,10 @@ export const ServiceList = () => {
                 return <div className="services-div" key={service.id}>
                     <div><img className="services-img" src={service.image} alt="Image" /></div>
                     <ul className="services-ul">
-                        <li className="services-li">{service.name}</li>
+                        <li className="services-name">{service.name}</li>
                         <li className="services-li">Description</li>
+                    </ul>
+                    <div className="btn-div">
                         {
                             SmokyUserObject.staff
                                 ? <>
@@ -81,11 +84,11 @@ export const ServiceList = () => {
 
                                 </>
                                 : <>
-                                    <button onClick={() => navigate(`/service/${service.id}`)}>Request Service</button>
+                                    <button className="request-btn" onClick={() => navigate(`/service/${service.id}`)}>Request Service</button>
 
                                 </>
                         }
-                    </ul>
+                    </div>
                 </div>
             })}
         </section>

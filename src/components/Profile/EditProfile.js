@@ -34,7 +34,7 @@ export const EditProfile = () => {
         event.preventDefault()
 
         const customerObj = {
-            image: "",
+            image: customer.image,
             address: customer.address,
             phoneNumber: customer.phoneNumber,
             userId: customer.userId
@@ -42,6 +42,7 @@ export const EditProfile = () => {
 
         const userObj = {
             fullName: customer?.user?.fullName,
+            isStaff: customer?.user?.isStaff,
             email: customer?.user?.email
         }
 
@@ -71,6 +72,24 @@ export const EditProfile = () => {
 
     return <form className="ticketForm">
         <h2 className="ticketForm__title">Service Ticket</h2>
+        <fieldset>
+
+            <div className="form-group">
+                <label htmlFor="description">Profile Image Url:</label>
+                <textarea
+                    required autoFocus
+                    type="text"
+                    className="form-control"
+                    value={customer.image}
+                    onChange={
+                        (evt) => {
+                            const copy = { ...customer }
+                            copy.image = evt.target.value
+                            setCustomer(copy)
+                        }
+                    }></textarea>
+            </div>
+        </fieldset>
         <fieldset>
 
             <div className="form-group">
