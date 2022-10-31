@@ -1,0 +1,119 @@
+.profile-h2 {
+    text-align: center;
+    font-size: 40px;
+    margin-top: 50px;
+}
+
+.profile-div {
+    display: flex;
+    justify-content: center;
+
+}
+
+.profile-img {
+    border-radius: 360px;
+    width: 400px;
+    padding-bottom: 10px;
+}
+
+.profile-ul {
+    background-color: antiquewhite;
+    margin-left: 60px;
+    width: 600px;
+    height: 300px;
+    padding-left: 80px;
+    padding-top: 40px;
+    font-size: 20px;
+    list-style-type: none;
+    border-radius: 12px;
+    font-weight: 400;
+}
+
+.profile-li {
+    margin-bottom: 15px;
+
+}
+
+.profile-edit-btn {}
+
+.service-btns {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.all {
+    border-radius: 12px;
+    background-color: #577C46;
+    color: antiquewhite;
+    align-self: center;
+    width: 150px;
+    font-weight: 600;
+}
+
+.services-div-profile {
+    display: flex;
+    flex-direction: column;
+    background: #577C46;
+    border-radius: 12px;
+    padding: 20px;
+    padding-right: 200px;
+    padding-left: 200px;
+    justify-content: space-around;
+
+}
+
+.request-card {
+
+    background-color: antiquewhite;
+    /* width: 950px;
+    height: 280px; */
+    border-radius: 12px;
+    margin: 20px;
+    padding-top: 10px;
+    padding-right: 5px;
+    align-items: center;
+    font-size: 18px;
+
+}
+
+.card-aside-top {
+    float: right;
+    /* background-color: aliceblue; */
+    border-radius: 12px;
+    font-weight: 600;
+    width: 100px;
+    text-align: center;
+}
+
+.card-ul {}
+
+.card-li {
+    margin-bottom: 5px;
+}
+
+.card-aside-bottom {
+    display: flex;
+    float: right;
+    flex-direction: column;
+
+
+}
+
+.date-requested-h3 {
+    margin: 0%;
+    padding-right: 10px;
+}
+
+.date-h5 {
+    font-size: 18px;
+    margin: 0%;
+}
+
+.ticket_delete {
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: crimson;
+    color: antiquewhite;
+}
