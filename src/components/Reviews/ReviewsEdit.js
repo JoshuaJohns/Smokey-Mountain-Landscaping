@@ -7,7 +7,7 @@ export const EditReview = () => {
     const [user, setUser] = useState([])
     const [services, setServices] = useState([])
 
-    const [customer, setCustomer] = useState({
+    const [review, setReview] = useState({
         description: "",
         service: "",
         dateOfService: "",
@@ -39,7 +39,7 @@ export const EditReview = () => {
                 .then((response) => response.json())
                 .then((data) => {
                     const reviewObj = data[0]
-                    setCustomer(reviewObj)
+                    setReview(reviewObj)
                 })
         }, []
     )
@@ -58,11 +58,13 @@ export const EditReview = () => {
         event.preventDefault()
 
         const reviewObj = {
-            id: customer.id,
+            image: user.image,
+            id: review.id,
             userId: SmokyUserObject.id,
-            service: customer.service,
-            description: customer.description,
-            dateOfService: customer.dateOfService,
+            service: review.service,
+            description: review.description,
+            dateOfService: review.dateOfService,
+            name: user?.user?.fullName
 
         }
         return fetch(`http://localhost:8088/reviews/${reviewsId}`, {
@@ -97,12 +99,12 @@ export const EditReview = () => {
                             name="service-name"
                             type="radio"
                             value={service.name}
-                            checked={customer.service === service.name}
+                            checked={review.service === service.name}
                             onChange={
                                 (evt) => {
-                                    const copy = { ...customer }
+                                    const copy = { ...review }
                                     copy.service = evt.target.value
-                                    setCustomer(copy)
+                                    setReview(copy)
                                 }
                             }
                         />
@@ -118,12 +120,12 @@ export const EditReview = () => {
                     required autoFocus
                     type="date"
                     className="form-control"
-                    value={customer.dateOfService}
+                    value={review.dateOfService}
                     onChange={
                         (evt) => {
-                            const copy = { ...customer }
+                            const copy = { ...review }
                             copy.dateOfService = evt.target.value
-                            setCustomer(copy)
+                            setReview(copy)
                         }
                     }></input>
             </div>
@@ -136,12 +138,12 @@ export const EditReview = () => {
                     required autoFocus
                     type="text"
                     className="form-control"
-                    value={customer.description}
+                    value={review.description}
                     onChange={
                         (evt) => {
-                            const copy = { ...customer }
+                            const copy = { ...review }
                             copy.description = evt.target.value
-                            setCustomer(copy)
+                            setReview(copy)
                         }
                     }></textarea>
             </div>

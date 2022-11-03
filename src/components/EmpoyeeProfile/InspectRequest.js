@@ -7,10 +7,11 @@ export const InspectRequest = () => {
 
 
 
-    const [locations, setLocations] = useState([])
+
     const [request, setRequest] = useState([])
-    const [customer, setCustomer] = useState([])
     const [employee, setEmployee] = useState([])
+    const [service, setService] = useState([])
+
 
     const [userChoices, update] = useState({
 
@@ -26,39 +27,42 @@ export const InspectRequest = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/serviceRequests?_expand=user&id=${requestId}`)
+            fetch(`http://localhost:8088/serviceRequests?_expand=user&_expand=locationService&id=${requestId}`)
                 .then((response) => response.json())
                 .then((data) => {
                     const object = data[0]
                     setRequest(object)
 
+                }).then(() => {
+                    fetch(`http://localhost:8088/employess?_expand=user&userId=${SmokyUserObject.id}`)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            const employeeObj = data[0]
+                            setEmployee(employeeObj)
+                        })
+
                 })
         }, []
     )
 
 
 
-    useEffect(
-        () => {
-            fetch(`http://localhost:8088/customers?_expand=user&userId=${SmokyUserObject.id}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    const customerObj = data[0]
-                    setCustomer(customerObj)
-                })
-        }, []
+
+    useEffect(() => {
+        fetch(`http://localhost:8088/services?id=${request?.locationService?.serviceId}`)
+            .then((response) => response.json())
+            .then((data) => {
+                const serviceOnj = data[0]
+                setService(serviceOnj)
+            })
+
+    }, [request]
     )
 
-    useEffect(
-        () => {
-            fetch(`http://localhost:8088/employess?_expand=user&userId=${SmokyUserObject.id}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    const employeeObj = data[0]
-                    setEmployee(employeeObj)
-                })
-        }, []
-    )
+
+
+
+
 
 
 
@@ -82,10 +86,7 @@ export const InspectRequest = () => {
             id: request.id
 
         }
-        // const employeeTicketObj = {
-        //     userId: SmokyUserObject.id,
-        //     serviceRequestId: request.id
-        // }
+
 
         fetch(`http://localhost:8088/serviceRequests/${requestId}`, {
             method: "PUT",
@@ -95,16 +96,7 @@ export const InspectRequest = () => {
             body: JSON.stringify(serviceRequestObj)
         })
             .then(res => res.json())
-            // .then(() => {
-            //     fetch(`http://localhost:8088/employeeTickets`, {
-            //         method: "POST",
-            //         headers: {
-            //             "Content-Type": "application/json"
-            //         },
-            //         body: JSON.stringify(employeeTicketObj)
-            //     })
-            //         .then(res => res.json())
-            // })
+
             .then(() => {
                 navigate("/profile")
             })
@@ -113,16 +105,16 @@ export const InspectRequest = () => {
 
     return (
         <form className="productForm">
-
+            <h2 className="ticketForm__title">Inspecting Request</h2>
             <div className="request-div">
                 <ul>
-                    <li className="request-li">{request?.user?.fullName}</li>
-                    <li className="request-li">{request.address}</li>
-                    <li className="request-li">{request.service}</li>
-                    <li className="request-li">{request.dateRequested}</li>
-                    <li className="request-li">{request.description}</li>
-                    <li className="request-li">{request.status}</li>
-                    <li className="request-li">{request.quotePrice}</li>
+                    <li className="request-li"><b>Customer:</b> {request?.user?.fullName}</li>
+                    <li className="request-li"><b>Address:</b> {request.address}</li>
+                    <li className="request-li"><b>Service:</b> {request.service}</li>
+                    <li className="request-li"><b>Scale For Service:</b>{service?.quotedBy}</li>
+                    <li className="request-li"><b>Description:</b> {request.description}</li>
+                    <li className="request-li"><b>Date Requested:</b> {request.dateRequested}</li>
+                    <li className="request-li"><b>Status:</b> {request.status}</li>
                 </ul>
             </div>
 
@@ -130,20 +122,39 @@ export const InspectRequest = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        placeholder="Choose Status"
 
+                    <label>Accepted</label>
+                    <input
+                        name="status"
+                        type="radio"
+                        value="Accepted"
+                        checked={userChoices.status === "Accepted"}
                         onChange={
                             (evt) => {
                                 const copy = { ...userChoices }
-                                copy.status = evt.target.value
+                                copy.status = (evt.target.value)
                                 update(copy)
                             }
-                        } />
+                        }
+                    />
                 </div>
+                <div className="form-group">
+                    <label>Rejected</label>
+                    <input
+                        name="status"
+                        type="radio"
+                        value="Rejected"
+                        checked={userChoices.status === "Rejected"}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...userChoices }
+                                copy.status = (evt.target.value)
+                                update(copy)
+                            }
+                        }
+                    />
+                </div>
+
             </fieldset>
             <fieldset>
                 <div className="form-group">
@@ -165,7 +176,7 @@ export const InspectRequest = () => {
             <button
                 onClick={(clickEvent) => handleSubmitButton(clickEvent)}
                 className="btn-primary">
-                Add to Cart
+                Submit Response
             </button>
 
 

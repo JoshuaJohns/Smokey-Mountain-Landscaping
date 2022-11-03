@@ -50,6 +50,7 @@ export const AddReview = () => {
         event.preventDefault()
 
         const reviewObj = {
+            image: customer.image,
             userId: SmokyUserObject.id,
             service: userChoices.service,
             description: userChoices.description,
@@ -74,14 +75,14 @@ export const AddReview = () => {
 
 
     return <form className="ticketForm">
-        <h2 className="ticketForm__title">Service Ticket</h2>
+        <h2 className="ticketForm__title">Leave A Review</h2>
         <div>
-            Name: {customer?.user?.fullName}
+            <b> Name:</b> {customer?.user?.fullName}
         </div>
 
         <fieldset>
             <div className="form-group">
-                <label htmlFor="service-name">What service did you recieve?</label>
+                <label htmlFor="service-name"><b>What service did you recieve?</b></label>
                 {services.map((service) => {
                     return <div key={service.id} className="select">
 
@@ -105,7 +106,7 @@ export const AddReview = () => {
         </fieldset>
         <fieldset>
             <div className="form-group">
-                <label htmlFor="name">Date Of Service:</label>
+                <label htmlFor="name"><b>Date Of Service:</b></label>
                 <input
                     required autoFocus
                     name="name"
@@ -123,7 +124,7 @@ export const AddReview = () => {
         </fieldset>
         <fieldset>
             <div className="form-group">
-                <label htmlFor="name">Leave a Coment:</label>
+                <label htmlFor="name"><b>Leave a Coment:</b></label>
                 <input
                     required autoFocus
                     name="name"

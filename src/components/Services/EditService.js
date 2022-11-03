@@ -62,7 +62,7 @@ export const EditService = () => {
 
 
     return <form className="ticketForm">
-        <h2 className="ticketForm__title">Service Ticket</h2>
+        <h2 className="ticketForm__title">Edit Service</h2>
         <fieldset>
 
             <div className="form-group">

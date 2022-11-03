@@ -44,7 +44,7 @@ export const ServiceList = () => {
                     getAllServices()
                 })
         }}
-            className="ticket_finish">DELETE</button>
+            className="service-delete-btn">DELETE</button>
 
     }
 
@@ -59,7 +59,7 @@ export const ServiceList = () => {
         {
             SmokyUserObject.staff
                 ? <>
-                    <button onClick={() => navigate(`/service/add`)}>Add Service</button>
+                    <button className="add-ercice-btn" onClick={() => navigate(`/service/add`)}>Add Service</button>
 
                 </>
                 : <>
@@ -71,24 +71,24 @@ export const ServiceList = () => {
                     <div><img className="services-img" src={service.image} alt="Image" /></div>
                     <ul className="services-ul">
                         <li className="services-name">{service.name}</li>
-                        <li className="services-li">Description</li>
+                        <li className="services-li">{service.description}</li>
                     </ul>
-                    <div className="btn-div">
-                        {
-                            SmokyUserObject.staff
-                                ? <>
-                                    <button onClick={() => navigate(`/service/edit/${service.id}`)}>Edit</button>
+                    {
+                        SmokyUserObject.staff
+                            ? <>
+                                <section className="services-btn-section">
+                                    <button className="services-edit-btn" onClick={() => navigate(`/service/edit/${service.id}`)}>Edit</button>
                                     {
                                         deleteButton(service.id)
                                     }
 
-                                </>
-                                : <>
-                                    <button className="request-btn" onClick={() => navigate(`/service/${service.id}`)}>Request Service</button>
+                                </section>
+                            </>
+                            : <>
+                                <button className="request-btn" onClick={() => navigate(`/service/${service.id}`)}>Request Service</button>
 
-                                </>
-                        }
-                    </div>
+                            </>
+                    }
                 </div>
             })}
         </section>

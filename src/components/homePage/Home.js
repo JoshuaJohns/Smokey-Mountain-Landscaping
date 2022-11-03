@@ -3,21 +3,13 @@ import { useNavigate } from "react-router-dom"
 import "./home.css"
 export const Home = () => {
 
-    const [locationServices, setLocationServices] = useState([])
+
     const [locations, setLocations] = useState([])
 
     const navigate = useNavigate()
 
 
-    useEffect(
-        () => {
-            fetch(`http://localhost:8088/locationServices?_expand=location&_expand=service`)
-                .then((response) => response.json())
-                .then((locationsArray) => {
-                    setLocationServices(locationsArray)
-                })
-        }, []
-    )
+
     useEffect(
         () => {
             fetch(`http://localhost:8088/locations`)
@@ -83,8 +75,8 @@ export const Home = () => {
                 </div>
             })}
         </section>
-        <div>
-            <button onClick={() => navigate(`/services`)}>To Services</button>
+        <div className="to-services-div">
+            <button className="to-services" onClick={() => navigate(`/services`)}>To Services</button>
 
         </div>
     </>

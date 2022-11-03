@@ -99,11 +99,11 @@ export const RequestService = () => {
     return (
         <form className="productForm">
             <h2 className="productForm__title">Requesting {service.name} Service</h2>
-            <div>{<b>Quoted By:</b>} {`${service.quotedBy}`}</div>
+            <div>{<b>Standard Price:</b>} {`${service.quotedBy}`}</div>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="price"><b>Description of what you want:</b><br></br>{service.scale}:</label>
+                    <label htmlFor="price"><b>Description of what you want serviced:</b><br></br>{service.scale}:</label>
                     <input
                         required autoFocus
                         type="text"
@@ -143,7 +143,7 @@ export const RequestService = () => {
             <button
                 onClick={(clickEvent) => handleSubmitButton(clickEvent)}
                 className="btn-primary">
-                Add to Cart
+                Submit Request
             </button>
 
 

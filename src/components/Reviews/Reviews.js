@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-
+import "./Reviews.css"
 export const Reviews = () => {
 
     const [reviews, setReviews] = useState([])
@@ -48,12 +48,12 @@ export const Reviews = () => {
                     getAllReviews()
                 })
         }}
-            className="ticket_finish">DELETE</button>
+            className="reviews-delete-btn">DELETE</button>
 
     }
 
     return <>
-        <h2>Customer Reviews</h2>
+        <h2 className="reviews-h2">Customer Reviews</h2>
 
         <div className="reviews-btns-div">
             {
@@ -63,7 +63,7 @@ export const Reviews = () => {
 
                     </>
                     : <>
-                        <button onClick={() => navigate(`/reviews/add`)}>Add Review</button>
+                        <button className="add-review" onClick={() => navigate(`/reviews/add`)}>Add Review</button>
 
                     </>
             }
@@ -75,12 +75,12 @@ export const Reviews = () => {
                     <div><img className="reviews-img" src={reviews.image} alt="Image" /></div>
 
                     <ul className="reviews-ul">
-                        <li className="reviews-li">{reviews.name}</li>
-                        <li className="reviews-li">{reviews.dateOfService}</li>
-                        <li className="reviews-li">{reviews.service}</li>
-                        <li className="reviews-li">{reviews.description}</li>
+                        <li className="reviews-li-h2"><h2>{reviews.name}</h2></li>
+                        <li className="reviews-li"><b>Date Serviced:</b> {reviews.dateOfService}</li>
+                        <li className="reviews-li"><b>Service Recieved:</b> {reviews.service}</li>
+                        <li className="reviews-li"><b>Review:</b> {reviews.description}</li>
                     </ul>
-                    <div>
+                    <div className="staff-delete-btn-div">
                         {
                             SmokyUserObject.staff
                                 ? <>
@@ -97,7 +97,7 @@ export const Reviews = () => {
                             (SmokyUserObject.staff === false & reviews.userId === SmokyUserObject.id)
                                 ? <>
 
-                                    <button onClick={() => navigate(`/reviews/${reviews.id}`)}>Edit</button>
+                                    <button className="edit-review" onClick={() => navigate(`/reviews/${reviews.id}`)}>Edit</button>
 
 
                                 </>
