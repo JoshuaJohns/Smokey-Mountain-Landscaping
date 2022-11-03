@@ -23,3 +23,13 @@
     color: #1E1E1E;
 
 }
+
+.navbar__link:hover,
+.navbar__logout:hover {
+    color: aliceblue;
+}
+
+.navbar__link:focus {
+
+    color: rgb(247, 244, 244);
+}

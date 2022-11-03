@@ -69,7 +69,7 @@ export const EmployeeProfile = () => {
     )
 
     const getAllRequests = () => {
-        fetch(`http://localhost:8088/serviceRequests?_expand=user`)
+        fetch(`http://localhost:8088/serviceRequests?_sort=dateRequested&_expand=user`)
             .then((response) => response.json())
             .then((data) => {
 
@@ -77,6 +77,19 @@ export const EmployeeProfile = () => {
             })
     }
 
+    const deleteButton = (requestId) => {
+        return <button onClick={() => {
+            fetch(`http://localhost:8088/serviceRequests/${requestId}`, {
+                method: "DELETE"
+            })
+                .then(() => {
+
+                    getAllRequests()
+                })
+        }}
+            className="service-delete">DELETE</button>
+
+    }
 
 
     return <section>
@@ -85,9 +98,9 @@ export const EmployeeProfile = () => {
         <div className="profile-div">
             <img className="profile-img" src={employee.image} alt="image"></img>
             <ul className="profile-ul">
-                <li className="profile-li">{employee?.user?.fullName}</li>
+                <li className="profile-li"><b>{employee?.user?.fullName}</b></li>
                 <li className="profile-li">{employee?.user?.email}</li>
-                <li className="profile-li">{employee?.startDate}</li>
+                <li className="profile-li"><b>Started On:</b>  {employee?.startDate}</li>
                 <li className="profile-li">{employee?.phoneNumber}</li>
                 <button className="profile-edit-btn" onClick={() => navigate("/employee/edit")}>Edit</button>
             </ul>
@@ -112,7 +125,7 @@ export const EmployeeProfile = () => {
                     </aside>
 
                     <ul className="card-ul">
-                        <li className="card-li">{request?.user?.fullName}</li>
+                        <li className="card-li"><b>{request?.user?.fullName}</b></li>
                         <li className="card-li">{request.service}</li>
                         <li className="card-li">{request.address}</li>
                         <li className="card-li">${request.quotePrice}</li>
@@ -127,7 +140,8 @@ export const EmployeeProfile = () => {
                         myTickets
                             ? <>
                                 {
-                                    <button className="service-delete">delete</button>
+                                    deleteButton(request.id)
+
                                 }
                             </>
                             : <>

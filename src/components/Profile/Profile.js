@@ -83,7 +83,7 @@ export const Profile = () => {
         <div className="profile-div">
             <img className="profile-img" src={customer.image} alt="image"></img>
             <ul className="profile-ul">
-                <li className="profile-li">{customer?.user?.fullName}</li>
+                <li className="profile-li"><h2>{customer?.user?.fullName}</h2></li>
                 <li className="profile-li">{customer?.user?.email}</li>
                 <li className="profile-li">{customer?.address}</li>
                 <li className="profile-li">{customer?.phoneNumber}</li>
@@ -107,7 +107,7 @@ export const Profile = () => {
                         {request.status}
                     </aside>
                     <ul className="card-ul">
-                        <li className="card-li">{request?.user?.fullName}</li>
+                        <li className="card-li"><h2>{request?.user?.fullName}</h2></li>
                         <li className="card-li">{request.service}</li>
                         <li className="card-li">{request.address}</li>
                         <li className="card-li"> ${request.quotePrice}</li>

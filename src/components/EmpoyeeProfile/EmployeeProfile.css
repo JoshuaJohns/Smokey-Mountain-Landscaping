@@ -27,6 +27,7 @@
     list-style-type: none;
     border-radius: 12px;
     font-weight: 400;
+    border: solid;
 }
 
 .profile-li {
@@ -54,33 +55,39 @@
 
 .services-div-profile {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     background: #577C46;
     border-radius: 12px;
     padding: 20px;
     padding-right: 200px;
     padding-left: 200px;
     justify-content: space-around;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid;
 
 }
 
 .request-card {
 
     background-color: antiquewhite;
-    /* width: 950px;
-    height: 280px; */
+
     border-radius: 12px;
     margin: 20px;
     padding-top: 10px;
     padding-right: 5px;
     align-items: center;
     font-size: 18px;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 
 }
 
 .card-aside-top {
     float: right;
-    /* background-color: aliceblue; */
     border-radius: 12px;
     font-weight: 600;
     width: 100px;
@@ -115,12 +122,32 @@
     margin-left: 20px;
     margin-top: 20px;
     background-color: rgb(38, 62, 165);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     color: antiquewhite;
+    border-radius: 100px;
 }
 
 .service-delete {
     margin-left: 20px;
     margin-top: 20px;
     background-color: crimson;
+    color: antiquewhite;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 100px;
+}
+
+.inspect-btn:hover,
+.service-delete:hover {
+    background-color: aliceblue;
+    color: black;
+}
+
+.all:active,
+.inspect-btn:active {
+    background: antiquewhite;
+}
+
+.all:focus {
+    background-color: #464945bb;
     color: antiquewhite;
 }

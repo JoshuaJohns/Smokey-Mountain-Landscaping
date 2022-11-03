@@ -60,3 +60,29 @@ fieldset {
     position: relative;
     bottom: -2rem;
 }
+
+.form-images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.form-profile-img {
+    height: 200px;
+}
+
+.label-img {
+    width: 200px;
+
+}
+
+.form-h3 {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 20px;
+}
+
+.ticketForm__title {
+    font-size: 45px;
+}

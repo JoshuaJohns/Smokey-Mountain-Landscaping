@@ -6,6 +6,8 @@
 
 .profile-div {
     display: flex;
+
+
     justify-content: center;
 
 }
@@ -17,6 +19,7 @@
 }
 
 .profile-ul {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background-color: antiquewhite;
     margin-left: 60px;
     width: 600px;
@@ -34,7 +37,13 @@
 
 }
 
-.profile-edit-btn {}
+.profile-edit-btn {
+    background-color: rgb(38, 62, 165);
+    color: antiquewhite;
+    width: 80px;
+    border-radius: 100px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 
 .service-btns {
     display: flex;
@@ -44,6 +53,7 @@
 }
 
 .all {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 12px;
     background-color: #577C46;
     color: antiquewhite;
@@ -53,22 +63,27 @@
 }
 
 .services-div-profile {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     background: #577C46;
     border-radius: 12px;
-    padding: 20px;
-    padding-right: 200px;
-    padding-left: 200px;
+    /* padding: 20px; */
+    /* padding-right: 200px;
+    padding-left: 200px; */
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
     justify-content: space-around;
 
 }
 
 .request-card {
 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background-color: antiquewhite;
-    /* width: 950px;
-    height: 280px; */
+    width: 950px;
+    height: 280px;
     border-radius: 12px;
     margin: 20px;
     padding-top: 10px;
@@ -113,7 +128,30 @@
 
 .ticket_delete {
     margin-left: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     margin-top: 20px;
     background-color: crimson;
     color: antiquewhite;
+    border-radius: 100px;
+}
+
+.ticket_delete:hover,
+.all:hover,
+.profile-edit-btn:hover {
+    background-color: aliceblue;
+    color: black;
+}
+
+.form-images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+
+.label-img {
+    width: 200px;
+
 }

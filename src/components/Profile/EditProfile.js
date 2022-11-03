@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 
 export const EditProfile = () => {
     // TODO: This state object should not be blank
+    const [images, setImages] = useState([])
     const [customer, setCustomer] = useState({
         image: "",
         address: '',
@@ -17,6 +18,17 @@ export const EditProfile = () => {
     const navigate = useNavigate()
     const localSmokyUser = localStorage.getItem("smokey_user")
     const SmokyUserObject = JSON.parse(localSmokyUser)
+
+
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/images`)
+                .then((response) => response.json())
+                .then((imagesArray) => {
+                    setImages(imagesArray)
+                })
+        }, []
+    )
 
 
     useEffect(
@@ -88,6 +100,30 @@ export const EditProfile = () => {
                             setCustomer(copy)
                         }
                     }></textarea>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div className="form-images">
+
+                {images.map((image) => {
+                    return <div key={image.id} className="radio">
+
+                        <label className="label-img"> <img className="form-profile-img" src={image.image} alt="image"></img></label>
+                        <input
+                            name="image"
+                            type="radio"
+                            value={image.image}
+                            checked={customer.image === image.image}
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...customer }
+                                    copy.image = (evt.target.value)
+                                    setCustomer(copy)
+                                }
+                            }
+                        />
+                    </div>
+                })}
             </div>
         </fieldset>
         <fieldset>

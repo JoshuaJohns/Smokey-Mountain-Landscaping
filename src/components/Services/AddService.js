@@ -53,7 +53,7 @@ export const AddService = () => {
 
 
     return <form className="ticketForm">
-        <h2 className="ticketForm__title">Service Ticket</h2>
+        <h2 className="ticketForm__title">Add a Service</h2>
         <fieldset>
 
             <div className="form-group">

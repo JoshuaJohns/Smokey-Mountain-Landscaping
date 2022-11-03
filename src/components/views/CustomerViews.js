@@ -22,6 +22,29 @@ export const CustomerViews = () => {
                     <hr></hr>
 
                     <Outlet />
+                    <section className="footer-section">
+                        <h3 className="footer-h3">Contact Us at the Store Closest to You</h3>
+                        <div className="footer-div">
+                            <ul className="footer-ul">
+                                <li className="footer-li-1">The Knoxville Store:</li>
+                                <li className="footer-li">#615-823-8295</li>
+                                <li className="footer-li">Volunteer dr, Knoxville</li>
+                            </ul>
+                            <ul className="footer-ul">
+                                <li className="footer-li-1">The Nashville Store:</li>
+                                <li className="footer-li">#615-417-6987</li>
+                                <li className="footer-li">Trinity Ln, Nashville</li>
+                            </ul>
+                            <ul className="footer-ul">
+                                <li className="footer-li-1">The Springfield Store:</li>
+                                <li className="footer-li">#615-766-9125</li>
+                                <li className="footer-li">7518 Highway 49E, Springfield</li>
+                            </ul>
+                        </div>
+                        <h4 className="footer-h4">Smoky Mountain Landscaping LLC 2020.</h4>
+                        <h5 className="footer-h5">All Rights Reserved</h5>
+
+                    </section>
                 </>
             }>
 
@@ -35,9 +58,10 @@ export const CustomerViews = () => {
                 <Route path="reviews" element={< Reviews />} />
                 <Route path="reviews/add" element={< AddReview />} />
                 <Route path="reviews/:reviewsId" element={< EditReview />} />
-                {/* <Route path="ticket/create" element={<></>} />
-                <Route path="tickets/:ticketId/edit" element={<></>} /> */}
+
+
             </Route>
         </Routes>
+
     )
 }

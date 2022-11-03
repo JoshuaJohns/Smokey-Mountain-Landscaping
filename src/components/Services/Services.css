@@ -2,6 +2,7 @@
     text-align: center;
     font-size: 40px;
     margin-top: 50px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .info-p {
@@ -9,9 +10,26 @@
     padding-left: 20px;
     padding-right: 40px;
     text-align: center;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.add-ercice-btn {
+    background-color: rgba(38, 61, 165, 0.945);
+    color: antiquewhite;
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+}
 
+.add-ercice-btn:hover,
+.request-btn:hover,
+.service-delete-btn:hover,
+.services-edit-btn:hover {
+    background-color: aliceblue;
+    color: black;
+}
 
 
 .services-sec {
@@ -30,12 +48,14 @@
     flex-direction: column;
     background-color: antiquewhite;
     width: 350px;
-    height: 400px;
+    height: 520px;
     border-radius: 12px;
     margin: 20px;
     padding-top: 10px;
     padding-right: 15px;
     align-items: center;
+    border: solid;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .services-img {
@@ -44,8 +64,9 @@
     margin-top: 22px;
     margin-left: 20px;
     border-radius: 12px;
+    border: solid;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
 
 
 
@@ -53,23 +74,27 @@
     margin-top: 20px;
     list-style-type: none;
 
+    max-width: 7.5cm;
+
 }
 
 .services-name {
-    font-size: 20px;
+    font-size: 28px;
     margin-bottom: 10px;
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 600;
+    line-height: 44px;
+    color: #1E1E1E;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
 
 }
 
 .services-li {
-    margin-bottom: 30px;
-}
 
-.btn-div {
-    display: flex;
-    justify-content: space-between;
-
+    height: 150px;
+    font-size: 15px;
 }
 
 .request-btn {
@@ -77,4 +102,27 @@
     background-color: #577C46;
     color: antiquewhite;
     align-self: center;
+}
+
+.services-btn-section {
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    margin-bottom: 0px;
+
+}
+
+
+.services-edit-btn {
+    background-color: rgb(38, 62, 165);
+    color: antiquewhite;
+    width: 100px;
+
+}
+
+.service-delete-btn {
+    width: 100px;
+    background-color: crimson;
+    color: antiquewhite;
+
 }
