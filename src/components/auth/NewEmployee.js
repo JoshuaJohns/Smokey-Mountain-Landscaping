@@ -58,7 +58,7 @@ export const NewEmployee = () => {
 
 
     return <form className="ticketForm">
-        <h2 className="ticketForm__title">New Customer</h2>
+        <h2 className="ticketForm__title">New Employee</h2>
         <fieldset>
 
             <div className="form-group">
