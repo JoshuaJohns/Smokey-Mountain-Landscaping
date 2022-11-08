@@ -52,7 +52,7 @@ export const Profile = () => {
     )
 
     const getAllRequests = () => {
-        fetch(`http://localhost:8088/serviceRequests?_expand=user&userId=${SmokyUserObject.id}`)
+        fetch(`http://localhost:8088/serviceRequests?_sort=dateRequested&_expand=user&userId=${SmokyUserObject.id}`)
             .then((response) => response.json())
             .then((data) => {
 
@@ -104,7 +104,7 @@ export const Profile = () => {
             {filteredRequests.map((request) => {
                 return <div className="request-card" key={request.id}>
                     <aside className="card-aside-top">
-                        {request.status}
+                        <h5>{request.status} By {request.inspectedBy}</h5>
                     </aside>
                     <ul className="card-ul">
                         <li className="card-li"><h2>{request?.user?.fullName}</h2></li>

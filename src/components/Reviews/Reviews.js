@@ -4,7 +4,8 @@ import "./Reviews.css"
 export const Reviews = () => {
 
     const [reviews, setReviews] = useState([])
-    const [customer, setCustomer] = useState([])
+    const [customers, setCustomer] = useState([])
+    const [filteredReviews, setFilteredReviews] = useState([])
 
 
     const navigate = useNavigate()
@@ -15,14 +16,16 @@ export const Reviews = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/customers?_expand=user&userId=${SmokyUserObject.id}`)
+            fetch(`http://localhost:8088/customers?_expand=user`)
                 .then((response) => response.json())
                 .then((data) => {
-                    const customerObj = data[0]
-                    setCustomer(customerObj)
+
+                    setCustomer(data)
                 })
         }, []
     )
+
+
 
     const getAllReviews = () => {
         fetch(`http://localhost:8088/reviews`)
@@ -31,6 +34,22 @@ export const Reviews = () => {
                 setReviews(servicesArray)
             })
     }
+
+    useEffect(
+        () => {
+            customers.map((customer) => {
+                reviews.map((reviews) => {
+
+                    if (customer.userId === reviews.userId) {
+                        return reviews.image = customer.image
+                    }
+                })
+                setFilteredReviews(reviews)
+            })
+
+        }, [customers, reviews]
+    )
+
 
     useEffect(
         () => {
@@ -70,7 +89,7 @@ export const Reviews = () => {
 
         </div>
         <section className="reviews-sec" >
-            {reviews.map((reviews) => {
+            {filteredReviews.map((reviews) => {
                 return <div className="reviews-div" key={reviews.id}>
                     <div><img className="reviews-img" src={reviews.image} alt="Image" /></div>
 
