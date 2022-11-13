@@ -21,7 +21,7 @@ export const EditEmployee = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/employess?_expand=user&userId=${SmokyUserObject.id}`)
+            fetch(`http://localhost:8088/employees?_expand=user&userId=${SmokyUserObject.id}`)
                 .then((response) => response.json())
                 .then((data) => {
                     const customerObj = data[0]
@@ -47,7 +47,7 @@ export const EditEmployee = () => {
 
         }
 
-        return fetch(`http://localhost:8088/employess/${employee.id}`, {
+        return fetch(`http://localhost:8088/employees/${employee.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

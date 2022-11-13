@@ -1,0 +1,97 @@
+.newmes-aside {
+    background-color: antiquewhite;
+    border-radius: 12px;
+
+}
+
+.newmes-div {
+    justify-content: space-around;
+    display: flex;
+
+    flex-wrap: wrap;
+}
+
+.newmes-ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.newmes-li {
+    text-align: center;
+    background-color: rgb(86, 151, 208);
+    color: black;
+    font-weight: 500px;
+    border-radius: 12px;
+    display: flex;
+    padding: 6px;
+    margin-left: 5px;
+}
+
+.confirm-btn {
+    background-color: rgb(239, 11, 11);
+    color: aliceblue;
+    border-radius: 12px;
+    margin-top: 3px;
+}
+
+
+.confirm-btn:hover {
+    background-color: aliceblue;
+    color: rgb(72, 77, 71);
+}
+
+.all {}
+
+.mes-div {
+    background-color: #577C46;
+    border-radius: 12px;
+    padding: 40px;
+
+
+}
+
+.message-div-c {
+    background-color: rgb(14, 130, 207);
+    width: 600px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding-top: 20px;
+    font-size: 20px;
+    border-radius: 100px;
+    margin-left: 50px;
+    float: right;
+
+}
+
+.message-div-e {
+    background-color: antiquewhite;
+    max-width: 800px;
+    height: 100px;
+    display: flex;
+    list-style: none;
+    padding-top: 20px;
+    font-size: 20px;
+    border-radius: 100px;
+    margin-right: 50px;
+}
+
+.meassages-li {
+    max-width: 500px;
+    margin: 10px;
+
+}
+
+.meassages-li-delete {
+    margin: 20px;
+    margin-top: 40px;
+}
+
+.recieved-ul {}
+
+.service-btns {
+    max-width: 600px;
+}

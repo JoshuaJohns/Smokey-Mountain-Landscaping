@@ -34,7 +34,7 @@ export const InspectRequest = () => {
                     setRequest(object)
 
                 }).then(() => {
-                    fetch(`http://localhost:8088/employess?_expand=user&userId=${SmokyUserObject.id}`)
+                    fetch(`http://localhost:8088/employees?_expand=user&userId=${SmokyUserObject.id}`)
                         .then((response) => response.json())
                         .then((data) => {
                             const employeeObj = data[0]
