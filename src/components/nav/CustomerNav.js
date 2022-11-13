@@ -17,6 +17,9 @@ export const CumstomerNav = () => {
                 <Link className="navbar__link" to="/profile">Profile</Link>
             </li>
             <li className="navbar__item active">
+                <Link className="navbar__link" to="/messages">Messages</Link>
+            </li>
+            <li className="navbar__item active">
                 <Link className="navbar__link" to="/reviews">Reviews</Link>
             </li>
             {

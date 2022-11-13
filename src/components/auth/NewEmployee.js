@@ -43,7 +43,7 @@ export const NewEmployee = () => {
             userId: SmokyUserObject.id
         }
 
-        return fetch(`http://localhost:8088/employess`, {
+        return fetch(`http://localhost:8088/employees`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

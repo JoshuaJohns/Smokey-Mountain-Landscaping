@@ -18,14 +18,7 @@ export const ServiceList = () => {
             getAllServices()
         }, []
     )
-    // useEffect(
-    //     () => {
-    //         const searchedTickets = services.filter(service => {
-    //             return service.name.toLowerCase().startsWith(seachTermState.toLowerCase())
-    //         })
-    //         setFilteredProducts(searchedTickets)
-    //     }, [seachTermState, services]
-    // )
+
     const getAllServices = () => {
         fetch(`http://localhost:8088/services`)
             .then((response) => response.json())
@@ -52,7 +45,6 @@ export const ServiceList = () => {
 
     return <>
         <h2 className="services-h2">Services We Provide</h2>
-        {/* <h2 className="gerneral-info">General Information</h2> */}
         <p className="info-p">Below you will see a large variety of services procided by The Mowing Company. We strive to meet
             all of our customers needs and expectations.</p>
 

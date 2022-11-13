@@ -9,7 +9,9 @@ import { Reviews } from "../Reviews/Reviews"
 import { EditReview } from "../Reviews/ReviewsEdit"
 import { RequestService } from "../Services/RequestService"
 import { ServiceList } from "../Services/ServiceList"
+import { Messages } from "../Messages/Messages"
 import "./Views.css"
+import { NewMessage } from "../Messages/NewMessage"
 
 
 export const CustomerViews = () => {
@@ -55,6 +57,9 @@ export const CustomerViews = () => {
                 <Route path="profile" element={< Profile />} />
                 <Route path="profile/edit" element={< EditProfile />} />
                 <Route path="profile/:serviceRequestId" element={< Profile />} />
+                <Route path="messages" element={< Messages />} />
+                <Route path="message/new/:employeeId" element={< NewMessage />} />
+                <Route path="messages/:employeeId" element={< Messages />} />
                 <Route path="reviews" element={< Reviews />} />
                 <Route path="reviews/add" element={< AddReview />} />
                 <Route path="reviews/:reviewsId" element={< EditReview />} />

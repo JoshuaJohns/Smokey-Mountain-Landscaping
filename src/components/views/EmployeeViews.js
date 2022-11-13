@@ -1,5 +1,7 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import { NewEmployee } from "../auth/NewEmployee"
+import { EmployeeMessages } from "../EmployeeMessages/EmployeeMessages"
+import { EmployeeNewMessage } from "../EmployeeMessages/EmployeeNewMessage"
 import { EditEmployee } from "../EmpoyeeProfile/EditEmployee"
 import { EmployeeProfile } from "../EmpoyeeProfile/EmployeeProfile"
 import { InspectRequest } from "../EmpoyeeProfile/InspectRequest"
@@ -50,6 +52,9 @@ export const EmployeeViews = () => {
                 <Route path="service/add" element={< AddService />} />
                 <Route path="service/edit/:serviceId" element={< EditService />} />
                 <Route path="profile" element={< EmployeeProfile />} />
+                <Route path="messages" element={< EmployeeMessages />} />
+                <Route path="message/new/:customerId" element={< EmployeeNewMessage />} />
+                <Route path="messages/:customerId" element={< EmployeeMessages />} />
                 <Route path="employee/edit" element={< EditEmployee />} />
                 <Route path="inspect/:requestId" element={< InspectRequest />} />
                 <Route path="employees" element={<></>} />
