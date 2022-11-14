@@ -117,7 +117,7 @@ export const Messages = () => {
                     if (newMessage.customerId === parseInt(customerId.id) & newMessage.employeeSent === true) {
                         return <ul className="newmes-ul" key={newMessage.id}>
                             <li className="newmes-li-delete">{confirmButton(newMessage.id)}</li>
-                            <li className="newmes-li">New Message from {newMessage.name}</li>
+                            <li className="newmes-li-c">New Message from {newMessage.name}</li>
                         </ul>
                     }
                 })}
@@ -128,7 +128,7 @@ export const Messages = () => {
                 return <div className="service-btns" key={employee.id}>
                     <button className="all" onClick={() => navigate(`/messages/${employee.id}`)} >{employee?.user?.fullName}</button>
                     {
-                        <button className="profile-edit-btn" onClick={() => navigate(`/message/new/${employee.id}`)}>Send a Message</button>
+                        <button className="send-mes" onClick={() => navigate(`/message/new/${employee.id}`)}>Send a Message</button>
                     }
                 </div>
             })}
@@ -147,7 +147,7 @@ export const Messages = () => {
 
 
                                 <ul className="message-div-c">
-
+                                    <li className="meassages-date-c">Sent: {Date(message.date)}</li>
                                     <li className="meassages-li">{message.customerWrote}</li>
                                     <li className="meassages-li-delete">  {deleteMyMessage(message.id)}</li>
 
@@ -168,7 +168,7 @@ export const Messages = () => {
                                 </>
                                 : <>
                                     <ul className="message-div-e">
-
+                                        <li className="meassages-date-e">Sent: {Date(message.date)}</li>
                                         <li className="meassages-li">{message.employeeWrote}</li>
 
                                     </ul>

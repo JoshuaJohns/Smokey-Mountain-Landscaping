@@ -62,7 +62,7 @@ export const AddService = () => {
                     required autoFocus
                     type="text"
                     className="form-control"
-                    // value={service.name}
+
                     onChange={
                         (evt) => {
                             const copy = { ...service }
@@ -80,7 +80,7 @@ export const AddService = () => {
                     required autoFocus
                     type="text"
                     className="form-control"
-                    // value={service.image}
+
                     onChange={
                         (evt) => {
                             const copy = { ...service }
@@ -98,7 +98,7 @@ export const AddService = () => {
                     required autoFocus
                     type="text"
                     className="form-control"
-                    // value={service.quotedBy}
+
                     onChange={
                         (evt) => {
                             const copy = { ...service }
@@ -111,12 +111,12 @@ export const AddService = () => {
         <fieldset>
 
             <div className="form-group">
-                <label htmlFor="description">Scale:</label>
+                <label htmlFor="description">What the customer needs to include for quote:</label>
                 <textarea
                     required autoFocus
                     type="text"
                     className="form-control"
-                    // value={service.scale}
+
                     onChange={
                         (evt) => {
                             const copy = { ...service }
@@ -134,7 +134,7 @@ export const AddService = () => {
                     required autoFocus
                     type="number"
                     className="form-control"
-                    // value={service.basePrice}
+
                     onChange={
                         (evt) => {
                             const copy = { ...service }
@@ -152,7 +152,7 @@ export const AddService = () => {
                     required autoFocus
                     type="text"
                     className="form-control"
-                    // value={service.description}
+
                     onChange={
                         (evt) => {
                             const copy = { ...service }

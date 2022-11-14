@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import "./Profile.css"
 
 
 export const EditProfile = () => {
@@ -83,7 +84,7 @@ export const EditProfile = () => {
 
 
     return <form className="ticketForm">
-        <h2 className="ticketForm__title">Service Ticket</h2>
+        <h2 className="ticketForm__title">My Profile</h2>
         <fieldset>
 
             <div className="form-group">

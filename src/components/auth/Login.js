@@ -30,7 +30,7 @@ export const Login = () => {
 
     return (
         <main className="container--login">
-            <section>
+            <section className="sec-login">
                 <form className="form--login" onSubmit={handleLogin}>
                     <h1>Smokey Mountain Landscaping</h1>
                     <h2>Please sign in</h2>

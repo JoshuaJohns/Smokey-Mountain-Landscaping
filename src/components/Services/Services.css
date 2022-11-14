@@ -91,6 +91,14 @@
 
 }
 
+.productForm {
+    font-size: 20px;
+    max-width: 800px;
+    margin-left: 130px;
+    margin-top: 40px;
+    margin-bottom: 200px;
+}
+
 .services-li {
 
     height: 150px;

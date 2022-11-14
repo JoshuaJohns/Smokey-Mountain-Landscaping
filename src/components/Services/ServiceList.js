@@ -45,7 +45,7 @@ export const ServiceList = () => {
 
     return <>
         <h2 className="services-h2">Services We Provide</h2>
-        <p className="info-p">Below you will see a large variety of services procided by The Mowing Company. We strive to meet
+        <p className="info-p">Below you will see a large variety of services provided by Smoky Mountain Landscaping. We strive to meet
             all of our customers needs and expectations.</p>
 
         {

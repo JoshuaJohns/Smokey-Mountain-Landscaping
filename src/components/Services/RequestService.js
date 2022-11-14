@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import "./Services.css"
 
 
 export const RequestService = () => {
@@ -103,7 +104,7 @@ export const RequestService = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="price"><b>Description of what you want serviced:</b><br></br>{service.scale}:</label>
+                    <label htmlFor="header"><b>Description of what you want serviced:</b><br></br>{service.scale}:</label>
                     <input
                         required autoFocus
                         type="text"
@@ -123,7 +124,7 @@ export const RequestService = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="name">Request Your Service On:</label>
+                    <label htmlFor="header"><b>Request Your Service On:</b></label>
                     <input
                         required autoFocus
                         name="name"

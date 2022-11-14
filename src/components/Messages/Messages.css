@@ -18,15 +18,23 @@
 
 }
 
-.newmes-li {
+.newmes-li-c {
     text-align: center;
-    background-color: rgb(86, 151, 208);
-    color: black;
+    background-color: rgb(44, 136, 216);
+    color: rgb(245, 238, 238);
     font-weight: 500px;
     border-radius: 12px;
     display: flex;
     padding: 6px;
+    height: 17px;
+    padding-top: 6px;
     margin-left: 5px;
+    margin-top: 17px;
+    margin-bottom: 5px;
+}
+
+.newmes-li-delete {
+    margin-top: 15px;
 }
 
 .confirm-btn {
@@ -42,7 +50,7 @@
     color: rgb(72, 77, 71);
 }
 
-.all {}
+
 
 .mes-div {
     background-color: #577C46;
@@ -64,7 +72,7 @@
     border-radius: 100px;
     margin-left: 50px;
     float: right;
-
+    padding-bottom: 100px;
 }
 
 .message-div-e {
@@ -77,6 +85,7 @@
     font-size: 20px;
     border-radius: 100px;
     margin-right: 50px;
+    padding-bottom: 20px;
 }
 
 .meassages-li {
@@ -93,5 +102,5 @@
 .recieved-ul {}
 
 .service-btns {
-    max-width: 600px;
+    /* max-width: 600px; */
 }

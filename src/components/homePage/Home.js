@@ -58,7 +58,7 @@ export const Home = () => {
             <p className="jobs-p">
                 Backed by the Better Business Bureau, our professional landscaping demonstartions have landed us
                 on the path for success. Our collective team of professionals can work around your schedule in order
-                to provide an excellent customer eperience as well as emplyee experience.
+                to provide an excellent customer experience as well as emplyee experience.
             </p>
         </div>
         <hr className="locations-hr"></hr>

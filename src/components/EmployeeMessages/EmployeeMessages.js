@@ -157,7 +157,8 @@ export const EmployeeMessages = () => {
 
                                     <ul className="message-div-e">
 
-                                        <li className="meassages-li">{message.customerWrote}</li>
+                                        <li className="meassages-date-e">Recieved: {Date(message.date)}</li>
+                                        <li className="meassages-li-e">{message.customerWrote}</li>
 
                                     </ul>
 
@@ -175,8 +176,10 @@ export const EmployeeMessages = () => {
 
                                 </>
                                 : <>
+
                                     <ul className="message-div-c">
 
+                                        <li className="meassages-date-c">Sent: {Date(message.date)}</li>
                                         <li className="meassages-li">{message.employeeWrote}</li>
                                         <li className="meassages-li-delete">  {deleteMyMessage(message.id)}</li>
                                     </ul>

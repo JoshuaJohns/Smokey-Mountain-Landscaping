@@ -120,7 +120,7 @@ export const EditService = () => {
         <fieldset>
 
             <div className="form-group">
-                <label htmlFor="description">Scale:</label>
+                <label htmlFor="description">What the customer needs to include for quote:</label>
                 <textarea
                     required autoFocus
                     type="text"

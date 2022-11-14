@@ -8,15 +8,16 @@ export const InspectRequest = () => {
 
 
 
-    const [request, setRequest] = useState([])
+    const [reqest, setReqt] = useState([])
     const [employee, setEmployee] = useState([])
     const [service, setService] = useState([])
 
 
-    const [userChoices, update] = useState({
+    const [request, setRequest] = useState({
 
         quotePrice: "",
         status: "",
+        dateRequested: "",
 
     })
 
@@ -78,8 +79,8 @@ export const InspectRequest = () => {
             service: request.service,
             scale: request.scale,
             description: request.description,
-            quotePrice: userChoices.quotePrice,
-            status: userChoices.status,
+            quotePrice: request.quotePrice,
+            status: request.status,
             address: request.address,
             dateRequested: request.dateRequested,
             inspectedBy: employee?.user?.fullName,
@@ -128,12 +129,28 @@ export const InspectRequest = () => {
                         name="status"
                         type="radio"
                         value="Accepted"
-                        checked={userChoices.status === "Accepted"}
+                        checked={request.status === "Accepted"}
                         onChange={
                             (evt) => {
-                                const copy = { ...userChoices }
+                                const copy = { ...request }
                                 copy.status = (evt.target.value)
-                                update(copy)
+                                setRequest(copy)
+                            }
+                        }
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Pending</label>
+                    <input
+                        name="status"
+                        type="radio"
+                        value="Pending"
+                        checked={request.status === "Pending"}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...request }
+                                copy.status = (evt.target.value)
+                                setRequest(copy)
                             }
                         }
                     />
@@ -144,12 +161,12 @@ export const InspectRequest = () => {
                         name="status"
                         type="radio"
                         value="Rejected"
-                        checked={userChoices.status === "Rejected"}
+                        checked={request.status === "Rejected"}
                         onChange={
                             (evt) => {
-                                const copy = { ...userChoices }
+                                const copy = { ...request }
                                 copy.status = (evt.target.value)
-                                update(copy)
+                                setRequest(copy)
                             }
                         }
                     />
@@ -162,12 +179,29 @@ export const InspectRequest = () => {
                         required autoFocus
                         type="number"
                         className="form-control"
+                        value={request.quotePrice}
                         placeholder="Display Quote"
                         onChange={
                             (evt) => {
-                                const copy = { ...userChoices }
+                                const copy = { ...request }
                                 copy.quotePrice = Number(evt.target.value)
-                                update(copy)
+                                setRequest(copy)
+                            }
+                        } />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <input
+                        required autoFocus
+                        type="date"
+                        className="form-control"
+                        value={request.dateRequested}
+                        onChange={
+                            (evt) => {
+                                const copy = { ...request }
+                                copy.dateRequested = evt.target.value
+                                setRequest(copy)
                             }
                         } />
                 </div>
